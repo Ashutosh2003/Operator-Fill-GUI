@@ -31,18 +31,19 @@ def gen_eqn(size,max_val,divisons):
             eqn = ret[0]
             op_pos = ret[1]
             nums = ret[2]
-        
-       
+    
+    ans = round(eval(eqn),3)
+    eqn = eqn + " = " + str(ans)
+    nums.append(ans)
 
     ret_val = ["",[]]
     ret_val[0] = eqn
     ret_val[1] = nums
-
+    print(ret_val)
     return ret_val
 
            
 def gen_division(eqn,op_pos,nums,indx):
-    print(op_pos)
     ops = ["+","-","*","/"]
     ret = ["",[],[],-1]
     index = random.randint(1,len(op_pos)-2)
@@ -67,12 +68,7 @@ def gen_division(eqn,op_pos,nums,indx):
     op_pos.append(len(eqn))
 
     pos = op_pos[index]
-    print(op_pos)
-    print(pos)
 
-    
-    print(op_pos)
-    print(eqn)
     ret[0] = eqn
     ret[1] = op_pos
     ret[2] = nums
@@ -80,7 +76,6 @@ def gen_division(eqn,op_pos,nums,indx):
 
     return ret
 
-print(gen_eqn(6,20,1))
 
 #print(div_str,replace_str)
 #print(op_pos,eqn,index,eqn2,op_pos2)

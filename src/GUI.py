@@ -2,6 +2,7 @@ import dearpygui.dearpygui as dpg
 import backend as bk
 
 nums = []
+buffer = 1
 usr_ops = ['+','+','+','+']
 
 dpg.create_context()
@@ -16,7 +17,7 @@ def render_eqn():
     eqn_stuff = bk.gen_eqn(3,20,1)
     global nums
     nums = eqn_stuff[1]
-    with dpg.window(label="",tag=12,width=640, height=200,pos=[30,60]):
+    with dpg.window(label="",tag=12,width=800, height=300,pos=[30,60]):
         with dpg.group(horizontal=True,pos=[250,50]):
             tg = 20
             for i in range(len(nums)-1):
@@ -29,19 +30,22 @@ def render_eqn():
         dpg.bind_font(primary_font)
 
 def user_eqn(sender,value):
+    global buffer
     eqn = ""
     global usr_ops
     usr_ops[sender-20] = value
     print(sender,value,nums,usr_ops)
-    with dpg.window(tag=12,pos=[30,60]):
+    with dpg.window(tag=12,pos=[30,60],width=800,height=300):
         dpg.add_spacer()
-        dpg.delete_item(31)
+        if buffer > 1:
+            dpg.delete_item(31)
+        buffer += 1
         with dpg.group(horizontal=True,pos=[250,100],tag=31):
             for i in range(len(nums)-2):
                 eqn = eqn + str(nums[i]) + str(usr_ops[i])
+
             eqn += str(nums[len(nums)-2])
             eqn += ' = ' + str(nums[len(nums)-1])
-            
             display = 'Your eqn is: ' + eqn
             dpg.add_text(display)
         

@@ -9,7 +9,7 @@ dpg.create_context()
 dpg.create_viewport(title='Custom Title', width=1280, height=720)
 
 with dpg.font_registry():
-    primary_font = dpg.add_font("/usr/share/fonts/gsfonts/NimbusMonoPS-Regular.otf",15)
+    primary_font = dpg.add_font("NimbusMonoPS-Regular.otf",15)
 
 dpg.set_global_font_scale(1.5)
 

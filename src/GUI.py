@@ -55,7 +55,7 @@ def user_eqn(sender,value):
 def render_buttons():
     with dpg.window(tag=12,pos=[30,60],width=800,height=300):
         with dpg.group(horizontal=True,pos=[250,150],tag=32):
-            dpg.add_spacer()
+            #dpg.add_spacer()
             show_score = dpg.add_button(label='Exit and show score')
             skip = dpg.add_button(label='skip')
             submit = dpg.add_button(label='submit',tag=41,callback=submit_callback)
@@ -63,10 +63,20 @@ def render_buttons():
 
 def chck_ans(usr_inp,ans):
     usr_ans = round(eval(usr_inp),3)
+    print(usr_ans)
     if usr_ans == ans:
         return True
     else:
         return False
+
+
+def reset():
+    global buffer
+    dpg.delete_item(12)
+    buffer=False
+    render_eqn()
+    render_buttons()
+
 
 def submit_callback():
     global buffer
@@ -78,10 +88,8 @@ def submit_callback():
             dpg.delete_item(31)
             dpg.add_text("Correct",pos=[30,60])
             time.sleep(3)
-        dpg.delete_item(12)
-        buffer=False
-        render_eqn()
-        render_buttons()
+        reset()
+        
             
         
 def main():
